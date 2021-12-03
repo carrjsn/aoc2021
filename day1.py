@@ -15,27 +15,6 @@ def main():
   print(increasing)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 if __name__ == '__main__':
   main()
 
