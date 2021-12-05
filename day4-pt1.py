@@ -32,10 +32,25 @@ def main():
             boards[i][row][col] = int(num)
 
     # then check if that move results in any boards containing a winning bingo row (i.e. all ints in a row or column)
-
+    for board in boards:
       # if winning board found, do the winning stuff here
+      if (check_winning_row(board) or check_winning_col(board)):
+        print('winning board', board)
+        print('winning num', num)
         # sum of all unmarked numbers (aka string nums) on the winning board
+        unmarked_sum = get_sum_of_unmarked_nums(board)
         # multiply by the curr_num that resulted in win
+        print('solution', unmarked_sum * int(num))
+        raise StopIteration
+
+
+def get_sum_of_unmarked_nums(matrix):
+  unmarked_nums = []
+  for row in matrix:
+    for el in row:
+      if isinstance(el, str):
+        unmarked_nums.append(int(el))
+  return sum(unmarked_nums)
 
 def check_winning_row(matrix):
   # check if any rows are all ints
