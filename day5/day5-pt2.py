@@ -43,13 +43,6 @@ def main():
       y_end = end[1] - 1
       y_step = -1
 
-    print('start, end', start, end)
-    print('x_start', x_start)
-    print('x_end', x_end)
-    print('x_step', x_step)
-    print('y_start', y_start)
-    print('y_end', y_end)
-    print('y_step', y_step)
 
     x = x_start
     y = y_start
@@ -65,15 +58,6 @@ def main():
         x += x_step
       if y != y_end:
         y += y_step
-    # for row in board:
-    #   print(row)
-
-    # print('-')
-
-    # for row in board:
-    #   print('end', row)
-
-
 
 
   # then count how many spaces are greater than 1
