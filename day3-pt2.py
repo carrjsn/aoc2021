@@ -1,11 +1,72 @@
 def main():
 
-  with open('day3example.txt', 'r') as file:
+  with open('day3.txt', 'r') as file:
     lines = file.readlines()
 
   counts = get_bit_counts(lines)
 
   print('counts', counts)
+
+
+  # get oxygen num -----------------------------------------------------------------
+  oxy_matches = []
+  for line in lines:
+      if (line[0] == '1' and counts[0] >= 0) or (line[0] == '0' and counts[0] < 0):
+        oxy_matches.append(line)
+
+  # iterate
+  i = 1
+  while True:
+    curr_counts = get_bit_counts(oxy_matches)
+    # filter remaining matches by whether current bit is a match
+    oxy_matches = get_oxy_matches(oxy_matches, curr_counts, i)
+    # check for terminal case
+    if len(oxy_matches) == 1:
+      break
+    # increment i
+    i += 1
+
+
+  # get co2 num -----------------------------------------------------------------------
+  co2_matches = []
+  for line in lines:
+      if (line[0] == '1' and counts[0] < 0) or (line[0] == '0' and counts[0] >= 0):
+        co2_matches.append(line)
+
+  # iterate
+  j = 1
+  while True:
+    curr_counts = get_bit_counts(co2_matches)
+    # filter remaining matches by whether current bit is a match
+    co2_matches = get_co2_matches(co2_matches, curr_counts, j)
+    # check for terminal case
+    if len(co2_matches) == 1:
+      break
+    # increment i
+    j += 1
+
+  oxygen_generator = int(oxy_matches[0], 2)
+  co2_scrubber = int(co2_matches[0], 2)
+
+  print('oxy', oxygen_generator)
+  print('co2', co2_scrubber)
+  print('solution', oxygen_generator * co2_scrubber)
+
+
+def get_co2_matches(lines, counts, idx):
+  matches = []
+  for line in lines:
+      if (line[idx] == '1' and counts[idx] < 0) or (line[idx] == '0' and counts[idx] >= 0):
+        matches.append(line)
+  return matches
+
+
+def get_oxy_matches(lines, counts, idx):
+  matches = []
+  for line in lines:
+      if (line[idx] == '1' and counts[idx] >= 0) or (line[idx] == '0' and counts[idx] < 0):
+        matches.append(line)
+  return matches
 
 
 def get_bit_counts(lines):
@@ -28,6 +89,11 @@ def get_bit_counts(lines):
 
 if __name__ == '__main__':
   main()
+
+
+
+
+
 
 
   # try 2 --- misunderstanding
