@@ -3,22 +3,13 @@ def main():
   with open('day3example.txt', 'r') as file:
     lines = file.readlines()
 
-  counts = {
-    # 0: 0,
-    # 1: 0,
-    # 2: 0,
-    # 3: 0,
-    # 4: 0,
-    # 5: 0,
-    # 6: 0,
-    # 7: 0,
-    # 8: 0,
-    # 9: 0,
-    # 10: 0,
-    # 11: 0,
-  }
+  counts = get_bit_counts(lines)
 
-  print(lines)
+  print('counts', counts)
+
+
+def get_bit_counts(lines):
+  counts = {}
   # get counts for each char in binary nums
   for i in range(len(lines)):
     # each binary num
@@ -32,12 +23,7 @@ def main():
         counts[j] -= 1
   # if num is positive, 1 is the more common char
   # if num is negative, 0 is more common char
-  print(counts)
-
-
-
-
-
+  return counts
 
 
 if __name__ == '__main__':
