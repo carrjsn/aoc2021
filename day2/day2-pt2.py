@@ -1,6 +1,6 @@
 def main():
 
-  with open('day2.txt', 'r') as file:
+  with open('day2/day2.txt', 'r') as file:
     lines = file.readlines()
 
   moves = list(map(lambda l : l.replace('\n', ''), lines))

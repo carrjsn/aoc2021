@@ -3,7 +3,7 @@
 
 def main():
 
-  with open('day1.txt', 'r') as file:
+  with open('day1/day1.txt', 'r') as file:
     lines = file.readlines()
 
   increasing = 0

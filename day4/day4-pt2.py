@@ -1,6 +1,6 @@
 def main():
 
-  with open('day4.txt', 'r') as file:
+  with open('day/4day4.txt', 'r') as file:
     lines = file.readlines()
 
   # print(lines)

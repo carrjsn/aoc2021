@@ -1,6 +1,6 @@
 def main():
 
-  with open('day3.txt', 'r') as file:
+  with open('day3/day3.txt', 'r') as file:
     lines = file.readlines()
 
   counts = get_bit_counts(lines)
