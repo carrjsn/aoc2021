@@ -4,26 +4,28 @@ def main():
     lines = file.readlines()
 
   counts = {
-    0: 0,
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0,
-    5: 0,
-    6: 0,
-    7: 0,
-    8: 0,
-    9: 0,
-    10: 0,
-    11: 0,
+    # 0: 0,
+    # 1: 0,
+    # 2: 0,
+    # 3: 0,
+    # 4: 0,
+    # 5: 0,
+    # 6: 0,
+    # 7: 0,
+    # 8: 0,
+    # 9: 0,
+    # 10: 0,
+    # 11: 0,
   }
 
   print(lines)
   # get counts for each char in binary nums
   for i in range(len(lines)):
     # each binary num
-    for j in range(5):
+    for j in range(len(lines[0]) - 1):
     # each char in binary num
+      if j not in counts.keys():
+        counts[j] = 0
       if lines[i][j] == '1':
         counts[j] += 1
       else:
