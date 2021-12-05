@@ -37,15 +37,20 @@ def main():
         # sum of all unmarked numbers (aka string nums) on the winning board
         # multiply by the curr_num that resulted in win
 
-
-
 def check_winning_row(matrix):
   # check if any rows are all ints
-  pass
+  for row in matrix:
+    if all([isinstance(x, int) for x in row]):
+      return True
+  return False
 
 def check_winning_col(matrix):
   # check if any columns are all ints
-  pass
+  for col in range(5):
+    curr_col = [ matrix[0][col], matrix[1][col], matrix[2][col], matrix[3][col], matrix[4][col] ]
+    if all([isinstance(el, int) for el in curr_col]):
+      return True
+  return False
 
 if __name__ == '__main__':
   main()
