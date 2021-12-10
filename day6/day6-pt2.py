@@ -1,6 +1,6 @@
 def main():
 
-  with open('day6/day6example.txt', 'r') as file:
+  with open('day6/day6.txt', 'r') as file:
     lines = file.readlines()
 
   # list of strings
@@ -20,12 +20,15 @@ def main():
     '8': '1'
   }
 
+  days = 256
+  skip, leftover = divmod(days, 7)
+
 
   # string_fish =
   # ints for tracking how many new fish a 'chunk' makes every 7 days
   # regens = []
   # string fish '34312'
-  for _ in range(2):
+  for _ in range(skip):
 
     # store sorted fish to represent the potentially new spawned fish (aka --  all fish with timers at 6 or less)
     sorted_fish = sorted(fish.copy())
@@ -50,19 +53,15 @@ def main():
     # fish = concat old fish + sorted_fish
     fish = fish + new_fish
 
-    print('fish', ''.join(fish))
+    # print('fish', ''.join(fish))
 
 
   # NOW figure out how far away from the target days you are
   # test - example 4 away from 18
 
-  # iterate 4 times
+  extra_fish = list(filter(lambda n : int(n) < leftover, fish))
 
-
-
-
-
-  print('after', len(fish))
+  print('after', len(fish) + len(extra_fish))
 
 
 if __name__ == '__main__':
