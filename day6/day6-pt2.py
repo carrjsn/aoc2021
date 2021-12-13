@@ -4,8 +4,8 @@ def main():
     lines = file.readlines()
 
   # list of strings
-  fish = list(lines[0].split(','))
-  print(fish)
+  fish = list(map(int, lines[0].split(',')))
+  # print(fish)
 
   # start with the number of input fish - they count too
   fish_count = len(fish)
@@ -20,7 +20,7 @@ def main():
 
 def spawn_count(num, days):
 
-  # not enough days will go by for num to spawn a fish
+  # not enough days will go by for num to spawn a fish - maybe for loop takes care of this
   if num >= days:
     return 0
 
@@ -37,7 +37,11 @@ def spawn_count(num, days):
   for i in range(num, days, 7):
     count += 1
     # add current day for subtracting from TOTAL days when recursing to get an accurate count
-    fish_birthdays.append(i)
+    fish_birthdays.append(i + 1)
+
+  # now for recursing
+  for day in fish_birthdays:
+    count += spawn_count(8, days - day)
 
   # maybe can lose top level if statement
   return count
