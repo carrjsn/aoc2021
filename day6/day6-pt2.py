@@ -1,24 +1,21 @@
 def main():
 
-  with open('day6/day6.txt', 'r') as file:
+  with open('day6/day6example.txt', 'r') as file:
     lines = file.readlines()
-
-  data = {}
-  # list of strings
   fish = list(map(int, lines[0].split(',')))
 
-  for val in range(max(9, max(fish))):
-    data[val] = 0
-  for ele in fish:
-    data[ele] += 1
+  # init dictionary with 0-8 as keys and set to initial count of each int in input arr
+  data = {int: fish.count(int) for int in range(9)}
 
   for _ in range(256):
     zero_count = data[0]
     # reset zero key
     data[0] = 0
-    for idx in range(1, len(data)):
+    for idx in range(1, 9):
       data[idx - 1] += data[idx]
+      # reset curr idx for next idx-val to populate it
       data[idx] = 0
+    # all zeros will lead to a new 6 AND a new 8
     data[6] += zero_count
     data[8] += zero_count
 
@@ -28,6 +25,7 @@ def main():
 
   print(total_fish)
 
+# 1640526601595
 
 if __name__ == '__main__':
   main()
