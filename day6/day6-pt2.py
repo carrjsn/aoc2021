@@ -20,8 +20,27 @@ def main():
 
 def spawn_count(num, days):
 
-  for i in range(days):
-    # if num makes new fish
+  # not enough days will go by for num to spawn a fish
+  if num >= days:
+    return 0
+
+  # will need to consider edge case for 8 and 7 since they only happen at the beginning of the cycle - maybe not? start = num may solve this
+
+  # start count at one b/c num is definitely less than day count
+  count = 0
+  fish_birthdays = []
+
+  # if num = 3, 4 days must go by for a new fish to be born
+  # if num = 3, 11 days must go by for 2 fish to be born
+
+  # maybe can lose top level if statement b/c if num is greater than days this loop wont run
+  for i in range(num, days, 7):
+    count += 1
+    # add current day for subtracting from TOTAL days when recursing to get an accurate count
+    fish_birthdays.append(i)
+
+  # maybe can lose top level if statement
+  return count
 
 if __name__ == '__main__':
   main()
