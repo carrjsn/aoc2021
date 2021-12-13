@@ -1,48 +1,71 @@
 def main():
 
-  with open('day6/day6example.txt', 'r') as file:
+  with open('day6/day6.txt', 'r') as file:
     lines = file.readlines()
 
+  data = {}
   # list of strings
   fish = list(map(int, lines[0].split(',')))
-  # print(fish)
 
-  # start with the number of input fish - they count too
-  fish_count = len(fish)
-  timespan = 150
+  for val in range(max(9, max(fish))):
+    data[val] = 0
+  for ele in fish:
+    data[ele] += 1
 
-  for i in range(len(fish)):
-    # determine how many lantern fish the current number will create in a given time span?  # add to fish count
-    fish_count += spawn_count(fish[i], timespan)
+  for _ in range(256):
+    zero_count = data[0]
+    # reset zero key
+    data[0] = 0
+    for idx in range(1, len(data)):
+      data[idx - 1] += data[idx]
+      data[idx] = 0
+    data[6] += zero_count
+    data[8] += zero_count
 
-  print(fish_count)
+  total_fish = 0
+  for key in data:
+    total_fish += data[key]
 
+  print(total_fish)
 
-def spawn_count(num, days):
-  # start count at one b/c num is definitely less than day count
-  count = 0
-  births = []
-
-  # if num = 3, 4 days must go by for a new fish to be born
-  # if num = 3, 11 days must go by for 2 fish to be born
-
-  # maybe can lose top level if statement b/c if num is greater than days this loop wont run
-  for i in range(num, days, 7):
-    count += 1
-    # add current day for subtracting from TOTAL days when recursing to get an accurate count
-    births.append(i + 1)
-
-  # now for recursing
-  for day in births:
-    count += spawn_count(8, days - day)
-
-  # maybe can lose top level if statement
-  return count
 
 if __name__ == '__main__':
   main()
 
 
+
+# TRY 4 - spawn count
+# start with the number of input fish - they count too
+#   fish_count = len(fish)
+#   timespan = 150
+
+#   for i in range(len(fish)):
+#     # determine how many lantern fish the current number will create in a given time span?  # add to fish count
+#     fish_count += spawn_count(fish[i], timespan)
+
+#   print(fish_count)
+
+
+# def spawn_count(num, days):
+#   # start count at one b/c num is definitely less than day count
+#   count = 0
+#   births = []
+
+#   # if num = 3, 4 days must go by for a new fish to be born
+#   # if num = 3, 11 days must go by for 2 fish to be born
+
+#   # maybe can lose top level if statement b/c if num is greater than days this loop wont run
+#   for i in range(num, days, 7):
+#     count += 1
+#     # add current day for subtracting from TOTAL days when recursing to get an accurate count
+#     births.append(i + 1)
+
+#   # now for recursing
+#   for day in births:
+#     count += spawn_count(8, days - day)
+
+#   # maybe can lose top level if statement
+#   return count
 
 
 
