@@ -9,7 +9,7 @@ def main():
 
   # start with the number of input fish - they count too
   fish_count = len(fish)
-  timespan = 18
+  timespan = 150
 
   for i in range(len(fish)):
     # determine how many lantern fish the current number will create in a given time span?  # add to fish count
@@ -19,16 +19,9 @@ def main():
 
 
 def spawn_count(num, days):
-
-  # not enough days will go by for num to spawn a fish - maybe for loop takes care of this
-  if num >= days:
-    return 0
-
-  # will need to consider edge case for 8 and 7 since they only happen at the beginning of the cycle - maybe not? start = num may solve this
-
   # start count at one b/c num is definitely less than day count
   count = 0
-  fish_birthdays = []
+  births = []
 
   # if num = 3, 4 days must go by for a new fish to be born
   # if num = 3, 11 days must go by for 2 fish to be born
@@ -37,10 +30,10 @@ def spawn_count(num, days):
   for i in range(num, days, 7):
     count += 1
     # add current day for subtracting from TOTAL days when recursing to get an accurate count
-    fish_birthdays.append(i + 1)
+    births.append(i + 1)
 
   # now for recursing
-  for day in fish_birthdays:
+  for day in births:
     count += spawn_count(8, days - day)
 
   # maybe can lose top level if statement
