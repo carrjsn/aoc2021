@@ -1,5 +1,5 @@
 def main():
-  with open('day9/day9example.txt') as file:
+  with open('day9/day9.txt') as file:
     files = list(map(lambda line : line.replace('\n', ''), file.readlines()))
 
   board = list(map(lambda row : list(row), files))
@@ -13,11 +13,12 @@ def main():
       # check curr ele to see if NOT a string 9
       if board[i][j] != '9':
        # if not a 9 - gather the basin and add (maybe just basin length) to basins
-       basins.append(gather_basin(board, i, j))
+       basins.append(len(gather_basin(board, i, j)))
        # gather_basin should alter the board array changing seen eles to 9s so that they aren't counted again
 
   # get 3 largest basins and multiply together
-  print(basins)
+  largest_basins = sorted(basins)[-3:]
+  print(largest_basins[0] * largest_basins[1] * largest_basins[2])
 
 
 def gather_basin(matrix, x, y):
@@ -53,12 +54,6 @@ def gather_basin(matrix, x, y):
   #return the curr basin arr
   return curr_basin
 
-
-# def board_fully_searched(matrix):
-#   for row in matrix:
-#     if not all(map(lambda el : el == '9', row)):
-#       return False
-#   return True
 
 
 if __name__ == '__main__':
