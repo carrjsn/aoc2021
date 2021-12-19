@@ -24,6 +24,7 @@ def main():
           # if num > 9
             # invoke flash - incrementing all nums around it - add to count
             # change val to 0
+            pass
 
       # after iteration - reset any 'flashed' to zero
 
