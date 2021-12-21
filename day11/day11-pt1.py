@@ -1,5 +1,5 @@
 def main():
-  with open ('day11/day11example.txt') as file:
+  with open ('day11/day11.txt') as file:
     files = list(map(lambda line : list(map(int, list(line.replace('\n', '')))), file.readlines()))
   # print(files)
 
@@ -8,7 +8,7 @@ def main():
   flashes = 0
 
   # 100 steps
-  for i in range(10):
+  for i in range(100):
     print('after' + str(i) + ' steps')
     for row in board:
       print(row)
