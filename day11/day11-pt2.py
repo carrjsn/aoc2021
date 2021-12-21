@@ -9,10 +9,6 @@ def main():
 
   # 100 steps
   for i in range(500):
-    # print('after' + str(i) + ' steps')
-    # for row in board:
-    #   print(row)
-
     # store coords that have flashed this step array - so that no octopus flashes more than once per step
     # append as string 'x-y' with dash in-between for easy comparison
     flashes_this_step = []
@@ -25,17 +21,17 @@ def main():
     while flashes_present(board):
       for x in range(10):
         for y in range(10):
-          # if num > 9
+          # if num > 9 and the number has NOT been flashed this round
           str_coords = str(x) + '-' + str(y)
           if board[x][y] > 9 and str_coords not in flashes_this_step:
             # invoke flash - incrementing all nums around it - add to count
             flash(board, x, y)
             # increment global flashes count
             flashes += 1
-            # add coords to flashes this step arr
+            # add coords to flashes-this-step arr
             flashes_this_step.append(str_coords)
 
-      # after iteration - reset any 'flashed' to zero so it doesn't flash again this step/turn
+      # after iteration - reset any 'flashed' els to zero so it doesn't flash again this step/turn
       for coord in flashes_this_step:
         row = int(coord.split('-')[0])
         col = int(coord.split('-')[1])
