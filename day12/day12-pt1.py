@@ -5,7 +5,7 @@ def main():
 
   # like a graph -- track edges of each node
   # make dict
-  edges = { }
+  edges = {}
 
   for connection in connections:
     first, second = connection.split('-')
@@ -21,8 +21,39 @@ def main():
   for key in edges:
     print(key, edges[key])
 
+  # helper function - define up here inside main for closure access to edges dictionary
+  def find_valid_paths(path, ele):
+    path_count = 0
+
+    # base case
+    if 'end' in edges[ele]:
+      path_count += 1
+    else:
+      # itereate over arr of edges
+      for edge in edges[ele]:
+        # don't include 'start' again -
+        # dont include any lower case places that have already been visited - in path..
+        if edge.islower() and edge in path or edge == 'start':
+          continue
+        else:
+          # add the current edge to the path
+          path.append(edge)
+          path_count += find_valid_paths(path, edges[edge])
+
+    return path_count
 
 
+
+  valid_paths = 0
+
+  # iterate over edges[start] and look for valid paths to end
+  for edge in edges['start']:
+    # find number of valid paths to end for each element
+
+    path = ['start', edge]
+    valid_paths += find_valid_paths(path, edge)
+
+  print('valid paths', valid_paths)
 
 
 
