@@ -23,22 +23,27 @@ def main():
 
   # helper function - define up here inside main for closure access to edges dictionary
   def find_valid_paths(path, ele):
+    print(path)
     path_count = 0
 
     # base case
-    if 'end' in edges[ele]:
+    if ele == 'end':
       path_count += 1
-    else:
-      # itereate over arr of edges
-      for edge in edges[ele]:
-        # don't include 'start' again -
-        # dont include any lower case places that have already been visited - in path..
-        if edge.islower() and edge in path or edge == 'start':
-          continue
-        else:
-          # add the current edge to the path
-          path.append(edge)
-          path_count += find_valid_paths(path, edges[edge])
+      print('success', path)
+      return path_count
+    # elif len(edges[ele]) == 1 and edges[ele][0] in path and edges[ele][0].islower():
+    #   return 0
+
+    # itereate over arr of edges
+    for edge in edges[ele]:
+      # don't include 'start' again -
+      # dont include any lower case places that have already been visited - in path..
+      if (edge.islower() and edge in path) or edge == 'start':
+        continue
+      else:
+        # add the current edge to the path
+        path.append(edge)
+        path_count += find_valid_paths(path, edge)
 
     return path_count
 
