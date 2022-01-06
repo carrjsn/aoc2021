@@ -30,33 +30,41 @@ def main():
 
   # somehow make a note of all the lower case (small caves) here in a list []
   # then for each path creation designate one of the small caves that will be allowed to be visited twice
-  print('small caves', small_caves)
+  # print('small caves', small_caves)
   # [a, b, d]
+  valid_paths_found = []
 
   # helper function - define up here inside main for closure access to edges dictionary
-  def find_valid_paths(path, ele, small_cave_visited_twice):
+  def find_valid_paths(path, ele, small_cave_visited_twice, small_cave):
     path_count = 0
 
     # base case
     if ele == 'end':
-      path_count += 1
-      print(path)
-      return path_count
+      string_path = ''.join(path)
+      if string_path not in valid_paths_found:
+        valid_paths_found.append(string_path)
+        path_count += 1
+        print(path)
+        return path_count
+      else:
+        return 0
 
     # itereate over arr of edges
     for edge in edges[ele]:
 
       # don't include 'start' again -
-      # dont include any lower case places that have already been visited - in path..
-      if (edge.islower() and edge in path and small_cave_visited_twice) or edge == 'start':
+      # dont include any lower case places that have already been visited in path - if they are not the designated small cave..
+      if (edge.islower() and edge in path and edge != small_cave) or edge == 'start':
+        continue
+      elif edge.islower() and edge == small_cave and small_cave_visited_twice:
         continue
       else:
-        # if current edge is a small cave and is already been traveled to, check if there's already been a small cave that has been traveled to twice!
-        if edge.islower() and edge in path and edge not in ['start', 'end']:
+        # if current edge is a small cave and is already been traveled to, check if it is the designated small cave that is allowed to be traveled to twice!
+        if edge == small_cave and edge in path:
           small_cave_visited_twice = True
         # don't change input path, but make new unique path for recursion - with the current edge appended to it
         new_path = path + [edge]
-        path_count += find_valid_paths(new_path, edge, small_cave_visited_twice)
+        path_count += find_valid_paths(new_path, edge, small_cave_visited_twice, small_cave)
 
     return path_count
 
@@ -71,7 +79,8 @@ def main():
     for cave in small_caves:
       # find number of valid paths to end for each element
       path = ['start', edge]
-      valid_paths += find_valid_paths(path, edge, cave, False)
+      print(path, cave)
+      valid_paths += find_valid_paths(path, edge, False, cave)
 
   print('valid paths', valid_paths)
 
